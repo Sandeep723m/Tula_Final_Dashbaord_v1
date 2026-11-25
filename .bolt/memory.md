@@ -14,13 +14,13 @@
 
 ## Decisions, constraints & rationale
 
-- Real app lives in `frontend/` with its own `package.json`; project root has no `package.json` (only an empty placeholder lockfile).
-- Dependencies must be installed inside `frontend/`, not at root.
-- Running `npm install` at root is a no-op and breaks the preview.
-- Frontend build compiles successfully once dependencies are installed in `frontend/`.
+- Real app lives in `frontend/` with its own `package.json` and Vite config.
+- Project root originally had no `package.json`; a root launcher was added to forward preview and build commands to `frontend/` so Bolt can discover and start the app from the root.
+- Dependencies are installed inside `frontend/`; root launcher delegates rather than duplicating deps.
+- Root install now succeeds and the frontend production build passes.
 
 ## Open questions & assumptions
 
-- Framework/build tool (e.g. Vite, CRA) not confirmed — inferred only that a build step exists.
 - App purpose, features, and target audience still unknown.
 - Whether a backend exists or is needed is unknown.
+- Whether the root launcher scripts cover dev, build, and preview uniformly is assumed but not fully verified.
